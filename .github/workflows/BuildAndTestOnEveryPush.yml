@@ -17,10 +17,9 @@ jobs:
       run: dotnet build
     
     - name: Test
-      run: dotnet test
-      
       env:
         ExampleEnviromentVariable:  ${{ secrets.ExampleEnviromentVariable }}
+      run: dotnet test
       
     - name: Pack release version of task
       if: runner.os == 'Windows' 

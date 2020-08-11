@@ -20,7 +20,7 @@ https://www.myget.org/F/frends-community/api/v3/index.json and in Gallery view i
 
 ## classNameForTask
 
-Repeats message
+Repeats message 
 
 ### Properties
 
