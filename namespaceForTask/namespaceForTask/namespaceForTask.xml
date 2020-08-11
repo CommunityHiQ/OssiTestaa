@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>namespaceForTask</name>
+    </assembly>
+    <members>
+        <member name="T:namespaceForTask.Parameters">
+            <summary>
+            Parameters class usually requires parameters that are required.
+            </summary>
+        </member>
+        <member name="F:namespaceForTask.Parameters.Message">
+            <summary>
+            Something that will be repeated.
+            </summary>
+        </member>
+        <member name="T:namespaceForTask.Options">
+            <summary>
+            Options class provides additional parameters.
+            </summary>
+        </member>
+        <member name="F:namespaceForTask.Options.Amount">
+            <summary>
+            Number of times input is echoed.
+            </summary>
+        </member>
+        <member name="F:namespaceForTask.Options.Delimiter">
+            <summary>
+            How repeats of input are separated.
+            </summary>
+        </member>
+        <member name="F:namespaceForTask.Result.Replication">
+            <summary>
+            Contains input repeated specified times.
+            </summary>
+        </member>
+        <member name="M:namespaceForTask.classNameForTask.classNameForTask(namespaceForTask.Parameters,namespaceForTask.Options,System.Threading.CancellationToken)">
+            <summary>
+            This is task
+            Documentation: https://github.com/CommunityHiQ/namespaceForTask
+            </summary>
+            <param name="input">What to repeat.</param>
+            <param name="options">Define if repeated multiple times. </param>
+            <param name="cancellationToken"></param>
+            <returns>{string Replication} </returns>
+        </member>
+    </members>
+</doc>
