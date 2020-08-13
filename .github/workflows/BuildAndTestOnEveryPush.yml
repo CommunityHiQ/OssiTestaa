@@ -21,6 +21,13 @@ jobs:
         ExampleEnviromentVariable:  ${{ secrets.ExampleEnviromentVariable }}
       run: dotnet test
       
+      
+    - shell: pwsh
+      env:
+        SUPER_SECRET: ${{ secrets.SuperSecret }}
+      run: |
+        example-command "$env:SUPER_SECRET"
+      
     - name: Pack release version of task
       if: runner.os == 'Windows' 
       run: dotnet pack --configuration Release --include-source
