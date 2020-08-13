@@ -20,7 +20,7 @@ jobs:
       env:
         SUPER_SECRET: ${{ secrets.ExampleEnviromentVariable }}
       run: |
-        example-command "$env:SUPER_SECRET"
+        Write-Host "$env:SUPER_SECRET"
     
     - name: Test
       env:
