@@ -18,13 +18,13 @@ jobs:
     
     - shell: pwsh
       env:
-        SUPER_SECRET: ${{ secrets.ExampleEnviromentVariable }}
+        SUPER_SECRET: ${{ secrets.ExampleEnviromentVariable2 }}
       run: |
         Write-Host "$env:SUPER_SECRET"
     
     - name: Test
       env:
-        ExampleEnviromentVariable:  ${{ secrets.ExampleEnviromentVariable }}
+        ExampleEnviromentVariable:  ${{ secrets.ExampleEnviromentVariable2 }}
         AAA:  ${{ secrets.AAA }}
 
       run: dotnet test
