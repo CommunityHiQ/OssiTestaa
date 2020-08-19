@@ -1,0 +1,39 @@
+name: BuildAndTestOnEveryPush.yml
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+  build:
+    name: Build on windows-latest
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Build
+      run: dotnet build
+    
+    - shell: pwsh
+      env:
+        SUPER_SECRET: ${{ secrets.ExampleEnviromentVariable2 }}
+      run: |
+        Write-Host "$env:SUPER_SECRET"
+    
+    - name: Test
+      env:
+        ExampleEnviromentVariable:  ${{ secrets.ExampleEnviromentVariable }}
+        AAA:  ${{ secrets.AAA }}
+
+      run: dotnet test
+      
+        
+    - name: Pack release version of task
+      if: runner.os == 'Windows' 
+      run: dotnet pack --configuration Release --include-source
+      
+    - name: Push NuGet package to the testfeed
+      if: runner.os == 'Windows' 
+      run: dotnet nuget push namespaceForTask\bin\Release\namespaceForTask.*.nupkg  --api-key ${{ secrets.CommunityFeedApiKey }} --source https://www.myget.org/F/frends-community-test/api/v2/package --symbol-source https://www.myget.org/F/frends-community-test/symbols/api/v2/package
