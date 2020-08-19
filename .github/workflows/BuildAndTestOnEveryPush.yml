@@ -24,7 +24,7 @@ jobs:
     
     - name: Test
       env:
-        ExampleEnviromentVariable:  ${{ secrets.ExampleEnviromentVariable2 }}
+        ExampleEnviromentVariable:  ${{ secrets.ExampleEnviromentVariable }}
         AAA:  ${{ secrets.AAA }}
 
       run: dotnet test

@@ -14,7 +14,7 @@ namespace namespaceForTask.Tests
         {
             var input = new Parameters
             {
-                Message = Environment.GetEnvironmentVariable("EXAMPLEENVIROMENTVARIABLE")
+                Message = Environment.GetEnvironmentVariable("EXAMPLEENVIROMENTVARIABLE", EnvironmentVariableTarget.User)
         };
 
             var options = new Options
