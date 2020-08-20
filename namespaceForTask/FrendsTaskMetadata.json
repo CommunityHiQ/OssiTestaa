@@ -1,0 +1,7 @@
+﻿{
+	"Tasks": [
+		{
+			"TaskMethod": "namespaceForTask.classNameForTask.TaskName"
+		}
+	]
+}
