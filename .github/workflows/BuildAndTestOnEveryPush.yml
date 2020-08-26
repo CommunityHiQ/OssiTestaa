@@ -17,8 +17,7 @@ jobs:
       id: vars
       shell: pwsh
       run: |
-        ([xml]$tmp = Get-Content -Path 'namespaceForTask/namespaceForTask.csproj')
-        $version = $tmp.SelectSingleNode("Project/PropertyGroup/Version").InnerText
+        $version = ([xml]$tmp = Get-Content -Path 'namespaceForTask/namespaceForTask.csproj').SelectSingleNode("Project/PropertyGroup/Version").InnerText
         echo "::set-output name=production::$version"
 
     - name: Build
