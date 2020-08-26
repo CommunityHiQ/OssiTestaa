@@ -1,0 +1,51 @@
+name: BuildAndTestOnEveryPush.yml
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+  build:
+    name: Build on windows-latest
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Set outputs
+      id: vars
+      shell: pwsh
+      run: |
+        ls
+        $version = ([xml]($tmp = Get-Content -Path 'namespaceForTask/namespaceForTask.csproj')).SelectSingleNode("Project/PropertyGroup/Version").InnerText
+        echo "::set-output name=production::$version"
+
+    - name: Build
+      run: dotnet build
+    
+    - name: Test
+      env:
+        ExampleEnviromentVariable:  ${{ secrets.ExampleEnviromentVariable }}
+      run: dotnet test
+      
+    - name: Pack release version of task
+      if: runner.os == 'Windows' 
+      run: dotnet pack --configuration Release --include-source
+      
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.vars.outputs.production  }}
+        release_name: Release ${{ steps.vars.outputs.production  }}
+        body: |
+          You can install the task via FRENDS UI Task View or you can find the NuGet package from the following NuGet feed https://www.myget.org/F/frends-community/api/v3/index.json and in Gallery view in MyGet https://www.myget.org/feed/frends-community/package/nuget/namespaceForTask
+        draft: false
+        prerelease: false
+      
+    - name: Push NuGet package to the testfeed
+      if: runner.os == 'Windows' 
+      run: dotnet nuget push namespaceForTask\bin\Release\namespaceForTask.*.nupkg  --api-key ${{ secrets.CommunityFeedApiKey }} --source https://www.myget.org/F/frends-community-test/api/v2/package --symbol-source https://www.myget.org/F/frends-community-test/symbols/api/v2/package
