@@ -13,6 +13,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
+    - name: Set outputs
+      id: vars
+      shell: pwsh
+      run: echo "::set-output name=production::true"
+    - name: Check outputs
+      shell: pwsh
+      run: echo ${{ steps.vars.outputs.production }}
+        
     - name: Build
       run: dotnet build
     
