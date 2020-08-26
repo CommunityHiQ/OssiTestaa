@@ -17,13 +17,9 @@ jobs:
       id: vars
       shell: pwsh
       run: |
-        ([xml]$tmp = Get-Content -Path 'namespaceForTask/namespaceForTask.csproj')
-        $version = $tmp.SelectSingleNode("Project/PropertyGroup/Version").InnerText
+        $version = ([xml]$_ = Get-Content -Path 'namespaceForTask/namespaceForTask.csproj').SelectSingleNode("Project/PropertyGroup/Version").InnerText
         echo "::set-output name=production::$version"
-    - name: Check outputs
-      shell: pwsh
-      run: echo ${{ steps.vars.outputs.production }}
-        
+
     - name: Build
       run: dotnet build
     
@@ -40,12 +36,12 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ steps.vars.outputs.production  }}
         release_name: Release ${{ steps.vars.outputs.production  }}
         body: |
-          You can find compiled taks in https://www.myget.org/feed/frends-community/package/nuget/namespaceForTask
+          You can install the task via FRENDS UI Task View or you can find the NuGet package from the following NuGet feed https://www.myget.org/F/frends-community/api/v3/index.json and in Gallery view in MyGet https://www.myget.org/feed/frends-community/package/nuget/namespaceForTask
         draft: false
         prerelease: false
       
