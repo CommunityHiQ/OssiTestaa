@@ -19,7 +19,7 @@ jobs:
       run: |
         cd namespaceForTask
         ls
-        ([xml]$tmp = Get-Content -Path '../../namespaceForTask/namespaceForTask.csproj')
+        ([xml]$tmp = Get-Content -Path 'namespaceForTask/namespaceForTask.csproj')
         $version = [xml]$tmp.SelectSingleNode("Project/PropertyGroup/Version").InnerText
         echo "::set-output name=production::$version"
     - name: Check outputs
