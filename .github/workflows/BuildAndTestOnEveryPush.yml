@@ -16,7 +16,10 @@ jobs:
     - name: Set outputs
       id: vars
       shell: pwsh
-      run: echo "::set-output name=production::true"
+      run: |
+        ([xml]$tmp = Get-Content -Path '../../namespaceForTask/namespaceForTask.csproj')
+        $version = [xml]$tmp.SelectSingleNode("Project/PropertyGroup/Version").InnerText
+        echo "::set-output name=production::$version"
     - name: Check outputs
       shell: pwsh
       run: echo ${{ steps.vars.outputs.production }}
