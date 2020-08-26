@@ -17,6 +17,7 @@ jobs:
       id: vars
       shell: pwsh
       run: |
+        cd namespaceForTask
         ls
         ([xml]$tmp = Get-Content -Path '../../namespaceForTask/namespaceForTask.csproj')
         $version = [xml]$tmp.SelectSingleNode("Project/PropertyGroup/Version").InnerText
