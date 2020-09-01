@@ -1,6 +1,6 @@
 # namespaceForTask
 
-FRENDS Community Task for classNameForTask
+frends Community Task for classNameForTask
 
 [![Actions Status](https://github.com/CommunityHiQ/namespaceForTask/workflows/PackAndPushAfterMerge/badge.svg)](https://github.com/CommunityHiQ/namespaceForTask/actions) ![MyGet](https://img.shields.io/myget/frends-community/v/namespaceForTask) [![License: UNLICENSED](https://img.shields.io/badge/License-UNLICENSED-yellow.svg)](https://opensource.org/licenses/UNLICENSED) 
 
@@ -13,7 +13,7 @@ FRENDS Community Task for classNameForTask
 
 # Installing
 
-You can install the task via FRENDS UI Task View or you can find the NuGet package from the following NuGet feed
+You can install the task via frends UI Task View or you can find the NuGet package from the following NuGet feed
 https://www.myget.org/F/frends-community/api/v3/index.json and in Gallery view in MyGet https://www.myget.org/feed/frends-community/package/nuget/namespaceForTask
 
 # Tasks
